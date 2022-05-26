@@ -137,6 +137,25 @@ console.log(compare(deckCards[8], deckCards[5])); */
 // 6. If input equals l, check and see if it's a positive number.
 // 7. If input doesn't equal h or l, tell the user that they need to guess either h or l and that they get no points for this round, then return false.
 
+const guess = (card1, card2) => {
+  console.log(`card: ${card1.rank} ${card1.suit}; card: ${card2.rank} ${card2.suit}`);
+  let userGuess = getInput('Do you think the next card will be higher (h) or lower (l) than this card?');
+
+  if(userGuess === 'h') {
+    return compare(card1, card2) < 0;
+  }
+  else if(userGuess === 'l') {
+    return compare(card1, card2) > 0;
+  }
+  else {
+    console.log("You need to guess either 'h' (higher) or 'l' (lower). \nYou get no points for this round");
+    return false;
+  }
+};
+
+/* console.log(guess(deckCards[8], deckCards[5])); */
+
+
 // STEP SIX - Let's play!
 // 1. declare a function called playGame
 // 2. declare a variable called deck (it's okay to reuse -- remember scope!) that takes the result of the shuffle function. Remember that the shuffle function needs to take the results one of our other functions as its argument...
