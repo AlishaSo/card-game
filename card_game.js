@@ -22,24 +22,35 @@ function getInput(prompt) {
 // HINT: The result of step 6 is that each card will be an object inside of the deck array, for example [{suit: "diamonds", rank: "A", value: 0}, {suit: "diamonds", rank: "2", value: 1},...{etc}]. For example, if we wanted to organize the players and teams of the NBA with index numbers, we could write: nba.push({player: players[i], team: teams[n], index: i})
 // 7. After your loops, return deck, which should now return an array full of card objects if you were to run buildDeck().
 
+//1. declare a function named buildDeck
 const buildDeck = () => {
-  const suits = ['spade', 'heart', 'diamond', 'club'];
+  //2. declare array of suits
+  const suits = ['spades', 'hearts', 'diamonds', 'clubs'];
+  //3. declare array of ranks
   const ranks = ['A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+  //4. declare empty array named deck
   let deck = [];
-  for(let x = 0; x < ranks.length; x++) {
-    for(let y = 0; y < suits.length; y++) {
+
+  //5. create two for loops, one being nested inside the other
+  for(let i = 0; i < ranks.length; i++) { //5a. the outer for loop needs to go over each element in the array 'ranks'
+    for(let j = 0; j < suits.length; j++) { //5b. the inner for loop will go over each element inside the 'suits' array
+      /* 6. push an object into the 'deck' array with the keys of: rank, suit and value;
+       * their values will be: the rank element that you're currently on, the suit element that you're currently on;
+       * and the index of the rank element that you're currently on, respectively
+       */
       deck.push({
-        rank: ranks[x],
-        suit: suits[y],
-        value: y
+        rank: ranks[i],
+        suit: suits[j],
+        value: i
       })
     }
   }
-  /* console.log(deck); */
+  console.log({deck});
   return deck;
 };
 
 /* buildDeck(); */
+
 
 // STEP TWO - Shuffling your deck
 // 1. use a function declaration to create a function called shuffle that takes deck as an argument.
@@ -53,6 +64,39 @@ const buildDeck = () => {
 // 9. Still inside, assign "shuffledDeck[randomIndex]" a value of "temporaryValue".  (currentIndex //i--;)
 // 10. Review the code from steps 7,8, and 9, and leave a comment explaining what you believe those lines of code are doing as they swap assignments of values between them.
 // 11. Finally, close the while loop and return "shuffledDeck". You should now be able to run shuffle(buildDeck()) in node and see your shuffled deck of cards.
+
+
+//1. declare a function named 'shuffle', which takes in a parameter named 'deck'
+const shuffle = deck => {
+  //2. create a variable called shuffledDeck, with the value of the parameter 'deck'
+  const shuffledDeck = deck;
+  /* 3. declare three variables: one named currentIndex, with the value of the length of the deck array;
+   * another named temporaryValue and another named randomIndex, and both have no value assigned
+  */
+  let currentIndex = deck.length;
+  let temporaryValue;
+  let randomIndex;
+
+  //4. create a while loop that checks if the value of the variable 'currentIndex' is not equal to 0
+  while(currentIndex != 0) {
+    //5. use the Math methods that generates a random number, to get a number between 0-'currentIndex'
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    //7. change the value of 'temporaryValue' to equal the value of the array 'shuffledDeck' at the index of 'currentIndex'
+    temporaryValue = shuffledDeck[currentIndex];  //10a. this is taking the value of the current element we're looking at in the shuffledDeck array and saving it to the variable temporaryValue
+    //8. replace the value of the element you're looking at inside the array 'shuffledDeck' to equal the value of the element at 'randomIndex' from the 'shuffledDeck' array
+    shuffledDeck[currentIndex] = shuffledDeck[randomIndex];  //10b. this is replacing the element we're currently looking at with the value of a different, random element from the array
+    //9. replace the value of the element at 'randomIndex' from the 'shuffledDeck' array to equal the value of 'temporaryValue'
+    shuffledDeck[randomIndex] = temporaryValue;  //10c. this is going to that random element who's value we just assigned somewhere else, and replacing it with the value that was in the place (at the index) of where we just changed the value
+
+    //6. subtract 1 from the 'currentIndex'
+    currentIndex--;
+  }
+  console.log({shuffledDeck});
+  //11. return the value of 'shuffledDeck'
+  return shuffledDeck;
+};
+
+shuffle(buildDeck());
 
 // STEP THREE - Greeting the player
 // 1. Declare a function called greet()
