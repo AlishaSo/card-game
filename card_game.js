@@ -119,6 +119,15 @@ greet();
 // 1. declare a function called compare that takes two cards as arguments
 // 2. return the value property of the first card minus the value property of the second card.
 
+const compare = (card1, card2) => {
+  return card1.value - card2.value;
+};
+
+/* const deckCards = buildDeck()
+console.log(deckCards[8], deckCards[5])
+console.log(compare(deckCards[8], deckCards[5])); */
+
+
 // STEP FIVE - Respond to User Guess
 // 1. declare a function called guess that takes two cards as arguments
 // 2. console.log the rank and suit of the current card
