@@ -98,12 +98,22 @@ const shuffle = deck => {
 
 shuffle(buildDeck());
 
+
 // STEP THREE - Greeting the player
 // 1. Declare a function called greet()
 // 2. Inside that function, declare a variable called "name" and use "getInput()" to welcome the user to the game, ask for their name, and assign their answer.
 // 3. Console.log name
 // 4. return name
 // 5. Done.
+
+const greet = () => {
+  let name = getInput('Hello! \nWhat\'s your name?');
+  console.log(name);
+  return name;
+};
+
+greet();
+
 
 // STEP FOUR - comparing cards
 // 1. declare a function called compare that takes two cards as arguments
