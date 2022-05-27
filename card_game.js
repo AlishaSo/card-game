@@ -45,7 +45,7 @@ const buildDeck = () => {
       })
     }
   }
-  console.log({deck});
+  /* console.log({deck}); */
   return deck;
 };
 
@@ -73,7 +73,7 @@ const shuffle = deck => {
   /* 3. declare three variables: one named currentIndex, with the value of the length of the deck array;
    * another named temporaryValue and another named randomIndex, and both have no value assigned
   */
-  let currentIndex = deck.length;
+  let currentIndex = deck.length - 1;
   let temporaryValue;
   let randomIndex;
 
@@ -91,12 +91,12 @@ const shuffle = deck => {
     //6. subtract 1 from the 'currentIndex'
     currentIndex--;
   }
-  console.log({shuffledDeck});
+  /* console.log({shuffledDeck}); */
   //11. return the value of 'shuffledDeck'
   return shuffledDeck;
 };
 
-shuffle(buildDeck());
+/* shuffle(buildDeck()); */
 
 
 // STEP THREE - Greeting the player
@@ -107,12 +107,12 @@ shuffle(buildDeck());
 // 5. Done.
 
 const greet = () => {
-  let name = getInput('Hello! \nWhat\'s your name?');
-  console.log(name);
+  let name = getInput('What\'s your name?');
+  console.log(`\n Hello, ${name}! \n`);
   return name;
 };
 
-greet();
+// greet();
 
 
 // STEP FOUR - comparing cards
@@ -138,7 +138,7 @@ console.log(compare(deckCards[8], deckCards[5])); */
 // 7. If input doesn't equal h or l, tell the user that they need to guess either h or l and that they get no points for this round, then return false.
 
 const guess = (card1, card2) => {
-  console.log(`card: ${card1.rank} ${card1.suit}; card: ${card2.rank} ${card2.suit}`);
+  console.log(`The current card is a ${card1.rank} of ${card1.suit} [${card2.rank}${card2.suit}]`);
   let userGuess = getInput('Do you think the next card will be higher (h) or lower (l) than this card?');
 
   if(userGuess === 'h') {
@@ -148,7 +148,7 @@ const guess = (card1, card2) => {
     return compare(card1, card2) > 0;
   }
   else {
-    console.log("You need to guess either 'h' (higher) or 'l' (lower). \nYou get no points for this round");
+    console.log("You need to guess either 'h' (higher) or 'l' (lower). \nYou get no points for this round\n");
     return false;
   }
 };
@@ -168,3 +168,36 @@ const guess = (card1, card2) => {
 // 9. Close the conditional statement and assign nextCard to currentCard. You may have to write this as the type of variable that's always global...
 // 10. Close the while loop and use a ternary statement that checks if the length of the deck array has reached zero. If it has not, tell the user that they won. If it has reached zero, tell them that they're out of cards and they lost.
 // 11. Write a line of code to execute the playGame function.
+
+const playGame = () => {
+  const deck = shuffle(buildDeck());
+  const playerName = greet();
+  let score = 0;
+  let currentCard = deck.pop();
+
+  while(score < 5 && score < deck.length) {
+    let nextCard = deck.pop();
+    if(guess(currentCard, nextCard)) {
+      score++;
+      console.log(`Congrats, you guessed correctly! +1 for you\n`);
+    }
+    else {
+      console.log(`Sorry, your guess was wrong. No points for you\n`);
+    }
+    currentCard = nextCard;
+  }
+
+  deck.length === 0 ? 
+  console.log(`    You\'re out of cards
+
+  🙃🙃🙃🙃🙃🙃🙃
+  🙃 you LOST 🙃
+  🙃🙃🙃🙃🙃🙃🙃\n`) 
+    : 
+    console.log(`
+  🎉🎉🎉🎉🎉🎉🎉🎉🎉
+  🎉  You   WON!  🎉
+  🎉🎉🎉🎉🎉🎉🎉🎉🎉\n`);
+};
+
+playGame();
