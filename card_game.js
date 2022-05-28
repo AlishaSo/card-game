@@ -27,7 +27,7 @@ const buildDeck = () => {
   //2. declare array of suits
   const suits = ['♠️', '❤️', '♣️', '♦️'];  //['spades', 'hearts', 'diamonds', 'clubs'];
   //3. declare array of ranks
-  const ranks = ['A', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
+  const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'];
   //4. declare empty array named deck
   let deck = [];
 
@@ -70,7 +70,7 @@ const shuffle = deck => {
   /* 3. declare three variables: one named currentIndex, with the value of the length of the deck array;
    * another named temporaryValue and another named randomIndex, and both have no value assigned
   */
-  let currentIndex = deck.length - 1;
+  let currentIndex = deck.length - 1; //** you have to subtract 1 because otherwise the function will try to access the element at index 52, which doesn't exist, thus will return undefined **
   let temporaryValue;
   let randomIndex;
 
